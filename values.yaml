@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
+mynamespace: ns-argo-app
 
 image:
   repository: nginx

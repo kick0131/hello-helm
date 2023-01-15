@@ -85,3 +85,6 @@ affinity: {}
 favorite:
   drink: coffee
   food: pizza
+debuginfo:
+  myport: 8098
+

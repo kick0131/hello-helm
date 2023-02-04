@@ -40,10 +40,12 @@ helm version
 
 ## 基本コマンド
 ```bash
+# テンプレート変換(動作確認)
+helm template .
 # カレントディレクトリでHelmアプリケーションを作成
 helm install hello-helm .
 # Helmから展開されたマニフェストファイルの確認
-helm install test --dry-run .
+helm install test --dry-run <chart name> .
 # 終了
 helm delete hello-helm
 ```

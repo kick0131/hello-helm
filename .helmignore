@@ -21,3 +21,7 @@
 .idea/
 *.tmproj
 .vscode/
+# hira add
+templates/hello-helm-template/.git
+templates/hello-helm-template/README.md
+

@@ -1,5 +1,26 @@
 # hello-helm
-動作確認用リポジトリ
+Helmチャート動作確認用リポジトリ
+- サブモジュール化
+
+```
+templates
+└ hello-helm-template(submodule)
+ ├ .git
+ ├ deployament.yaml
+ ├ 
+```
+.gitはマニフェストファイルではない為、.helmignoreでHelmマニフェスト対象外にする
+
+サブモジュールは3通りの方法で定義
+- gitプロトコルを利用
+  ```bash
+  url = git@github.com:kick0131/hello-helm-template.git
+  ```
+- http(PAT)プロトコルを利用
+  ```bash
+  url = https://<user>:<PAT>@github.com/kick0131/hello-helm-template.git
+  ```
+
 
 ```bash
 # 作成方法

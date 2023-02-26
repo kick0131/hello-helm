@@ -1,3 +1,6 @@
 [submodule "templates/hello-helm-template"]
 	path = templates/hello-helm-template
 	url = https://x-oauth-basic@github.com/kick0131/hello-helm-template.git
+[submodule "templates/bad-helm-template"]
+	path = templates/bad-helm-template
+	url = ../bad-helm-template.git

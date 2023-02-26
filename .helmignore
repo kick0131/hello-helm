@@ -24,4 +24,8 @@
 # hira add
 templates/hello-helm-template/.git
 templates/hello-helm-template/README.md
+templates/bad-helm-template/.git
+templates/bad-helm-template/check-template
+templates/bad-helm-template/README.md
+templates/hello-helm-template/tests
 

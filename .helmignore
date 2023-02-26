@@ -28,4 +28,5 @@ templates/bad-helm-template/.git
 templates/bad-helm-template/check-template
 templates/bad-helm-template/README.md
 templates/hello-helm-template/tests
+templates/bad-helm-template
 

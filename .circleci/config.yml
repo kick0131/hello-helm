@@ -30,7 +30,6 @@ jobs:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     environment:
-      - FOO: bar
       - MYUSER: $DOCKERHUB_USER
     resource_class: small
     steps:
@@ -41,6 +40,25 @@ jobs:
       - run:
           name: "cat context"
           command: "cat /var/test.txt"  
+  # CONTEXTの内容を出力してみるサンプルその２
+  test2:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    environment:
+      - MYUSER: $DOCKERHUB_USER
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "output context"
+          command: "echo $DOCKERHUB_USER | base64 > test.txt"
+      - run:
+          name: "cat context"
+          command: "base64 -d test.txt"
+
 
   # 全てのジョブが終わったことを知らせるジョブ
   finish-job:
@@ -63,7 +81,7 @@ workflows:
       - say-hello:
           context:
             - DockerHub
-      - test1:
+      - test2:
           context:
             - DockerHub
       - finish-job:
@@ -71,5 +89,4 @@ workflows:
           requires:
             - say-hello
             - test1
-
 

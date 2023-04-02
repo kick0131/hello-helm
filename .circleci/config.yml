@@ -54,11 +54,10 @@ jobs:
       - checkout
       - run:
           name: "output context"
-          command: "echo $DOCKERHUB_USER | base64 > test.txt"
+          command: "echo $DOCKERHUB_USER | base64 | tee test.txt"
       - run:
           name: "cat context"
-          command: "base64 -d test.txt"
-
+          command: "cat test.txt | base64 -d"
 
   # 全てのジョブが終わったことを知らせるジョブ
   finish-job:

@@ -10,17 +10,22 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: cimg/base:stable
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     environment:
       FOO: bar
-    parallelism: 3
     resource_class: small
     steps:
       - checkout
       - run:
           name: "Say hello"
           command: "echo Hello, $FOO World!"
+      - run:
+          name: "Say context"
+          command: "echo $DOCKERHUB_USER"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -28,3 +33,5 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+        context:
+          - DockerHub

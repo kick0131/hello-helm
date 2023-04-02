@@ -88,5 +88,5 @@ workflows:
           # 処理を待ち受ける
           requires:
             - say-hello
-            - test1
+            - test2
 

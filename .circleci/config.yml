@@ -1,6 +1,8 @@
 version: "2.1"
 
 jobs:
+
+  # echoをするジョブ
   say-hello:
     docker:
       - image: cimg/base:stable
@@ -8,7 +10,8 @@ jobs:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
     environment:
-      FOO: bar
+      - FOO: bar
+      - MYUSER: $DOCKERHUB_USER
     resource_class: small
     steps:
       - checkout
@@ -17,7 +20,41 @@ jobs:
           command: "echo Hello, $FOO World!"
       - run:
           name: "Say context"
-          command: "echo $DOCKERHUB_USER"
+          command: "echo $DOCKERHUB_USER"  
+
+  # CONTEXTの内容を出力してみるサンプル
+  test1:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    environment:
+      - FOO: bar
+      - MYUSER: $DOCKERHUB_USER
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "output context"
+          command: "echo $DOCKERHUB_USER > /var/test.txt"  
+      - run:
+          name: "cat context"
+          command: "cat /var/test.txt"  
+
+  # 全てのジョブが終わったことを知らせるジョブ
+  finish-job:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "finish call"
+          command: "echo SUCCESS"  
 
 workflows:
   version: 2
@@ -26,4 +63,13 @@ workflows:
       - say-hello:
           context:
             - DockerHub
+      - test1:
+          context:
+            - DockerHub
+      - finish-job:
+        # 処理を待ち受ける
+        requires:
+          - say-hello
+          - test1
+
 

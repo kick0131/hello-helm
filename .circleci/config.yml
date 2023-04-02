@@ -67,9 +67,9 @@ workflows:
           context:
             - DockerHub
       - finish-job:
-        # 処理を待ち受ける
-        requires:
-          - say-hello
-          - test1
+          # 処理を待ち受ける
+          requires:
+            - say-hello
+            - test1
 
 
